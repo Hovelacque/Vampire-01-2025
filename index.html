@@ -24,6 +24,10 @@
             y: canvas.height / 2,
             velocidade: 5
         }
+        const inimigo = {
+            x: 500,
+            y: 300
+        }
 
         function animation() {
             requestAnimationFrame(animation)
@@ -57,6 +61,20 @@
                 larguraFrame,               //largura do desenho no canvas
                 alturaFrame                 //altura do desenho no canvas
             )
+
+            //verifica colisao com inimigo
+            const tamanhoInimigo = 30;
+            const dx = (player.x + larguraFrame / 2) - inimigo.x;
+            const dy = (player.y + alturaFrame / 2) - inimigo.y;
+            const distanciaEntreEles = Math.hypot(dx, dy);
+
+            if (distanciaEntreEles < tamanhoInimigo)
+                ctx.fillStyle = "red"; //bateuuuuuu
+            else
+                ctx.fillStyle = "green"; //ta safe
+            ctx.beginPath()
+            ctx.arc(inimigo.x, inimigo.y, tamanhoInimigo, 0, Math.PI * 2)
+            ctx.fill()
 
             if (frames % 10 == 0) {
                 if (colunaFrame > 4)
